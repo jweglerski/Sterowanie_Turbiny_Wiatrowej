@@ -1,0 +1,54 @@
+START
+
+inicjalizacja_systemu()
+
+WHILE program_dziala
+
+    predkosc_wiatru = odczytaj_predkosc_wiatru()
+    kierunek_wiatru = odczytaj_kierunek_wiatru()
+    obroty = odczytaj_obroty_wirnika()
+    temperatura = odczytaj_temperature()
+    drgania = odczytaj_drgania()
+
+    IF drgania > limit_drgan
+        wlacz_hamulec()
+        ustaw_lopaty_bezpiecznie()
+        zatrzymaj_turbine()
+        wyswietl("AWARIA - ZA DUZE DRGANIA")
+        CONTINUE
+    END IF
+
+    IF predkosc_wiatru < minimalna_predkosc
+        zatrzymaj_turbine()
+        wyswietl("ZA MALY WIATR")
+        CONTINUE
+    END IF
+
+    IF predkosc_wiatru > maksymalna_predkosc
+        wlacz_hamulec()
+        ustaw_lopaty_bezpiecznie()
+        zatrzymaj_turbine()
+        wyswietl("ZA SILNY WIATR")
+        CONTINUE
+    END IF
+
+    ustaw_gondole(kierunek_wiatru)
+
+    IF predkosc_wiatru < 10
+        ustaw_kat_lopat(duzy_kat)
+    ELSE
+        ustaw_kat_lopat(maly_kat)
+    END IF
+
+    steruj_generatorem(obroty)
+
+    zapisz_dane(
+        predkosc_wiatru,
+        obroty,
+        temperatura,
+        drgania
+    )
+
+END WHILE
+
+STOP
