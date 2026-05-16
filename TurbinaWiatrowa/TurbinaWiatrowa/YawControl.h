@@ -1,12 +1,7 @@
 #pragma once
-
-public ref class YawControl
-{
+#include "Sterownik.h"
+class YawControl:public Sterownik{
 public:
-    double aktualnyKat;
-
-    YawControl()
-    {
-
-    }
+    void obliczKorekte();
+    bool pozycjaOciagnieta();
 };

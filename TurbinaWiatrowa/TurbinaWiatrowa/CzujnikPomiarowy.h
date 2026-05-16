@@ -1,13 +1,16 @@
 #pragma once
-
-public ref class CzujnikPomiarowy
+#include "Wiatr.h"
+#include "StanTurbiny.h"
+class CzujnikPomiarowy
 {
+private:
+    double kierunekWiatru;
+    double predkoscWiatru;
+    double katPitch;
+    double katYaw;
+    double predkoscObrotowa;
 public:
-    double odczytWiatru;
-    double odczytMocy;
-
-    CzujnikPomiarowy()
-    {
-
-    }
+    CzujnikPomiarowy(double kierunekWiatru, double predkoscWiatru, double katPitch, double katYaw, double predkoscObrotowa);
+    Wiatr odczytajWiatr();
+    StanTurbiny odczytajStan();
 };

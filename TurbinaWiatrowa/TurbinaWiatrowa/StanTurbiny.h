@@ -1,16 +1,11 @@
 #pragma once
 
-public ref class StanTurbiny
+class StanTurbiny
 {
-public:
+private:
     double yaw;
     double pitch;
     double obroty;
-    double moc;
-    bool hamulec;
-
-    StanTurbiny()
-    {
-        
-    }
+public:
+    StanTurbiny(double pitch, double yaw, double obroty);
 };

@@ -3,24 +3,21 @@
 
 #include "Wiatr.h"
 #include "StanTurbiny.h"
-#include "PID.h"
-#include "YawControl.h"
-#include "PitchControl.h"
-#include "Hamowanie.h"
 
-public ref class Sterownik
+
+class Sterownik
 {
+protected:
+    Wiatr wiatr;
+    StanTurbiny stan;
+    double predkoscMinimalna;
+    unsigned int tryb;
 public:
-    Wiatr^ wiatr;
-    StanTurbiny^ stan;
-
-    PID^ pid;
-    YawControl^ yaw;
-    PitchControl^ pitch;
-    Hamowanie^ hamowanie;
-
-    Sterownik()
-    {
-
-    }
+    Sterownik();
+    void wybierzTryb();
+    StanTurbiny obliczNowyStan();
+    void wykonajPID();
 };
+
+
+

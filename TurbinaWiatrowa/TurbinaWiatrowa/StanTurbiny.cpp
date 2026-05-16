@@ -1,4 +1,3 @@
 #include "StanTurbiny.h"
 
-StanTurbiny::StanTurbiny() {}
-StanTurbiny::~StanTurbiny() {}
+StanTurbiny::StanTurbiny(double pitch, double yaw, double obroty):pitch(pitch),yaw(yaw),obroty(obroty){};

@@ -1,12 +1,9 @@
 #pragma once
+#include "Sterownik.h"
 
-public ref class Hamowanie
-{
+class Hamowanie:public Sterownik{
 public:
-    bool aktywne;
-
-    Hamowanie()
-    {
-        aktywne = false;
-    }
+    double pitch;
+private:
+    void ustawPitch();
 };

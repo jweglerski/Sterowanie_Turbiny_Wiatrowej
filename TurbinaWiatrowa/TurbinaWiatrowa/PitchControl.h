@@ -1,12 +1,11 @@
 #pragma once
+#include "Sterownik.h"
 
-public ref class PitchControl
-{
+class PitchControl:public Sterownik{
+private:
+    double katMaksymalny;
+    double katMinimalny;
 public:
-    double katLopat;
-
-    PitchControl()
-    {
-
-    }
+    PitchControl();
+    void obliczKorekte();
 };

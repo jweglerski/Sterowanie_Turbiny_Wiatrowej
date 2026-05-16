@@ -1,19 +1,10 @@
 #pragma once
 
-public ref class Wiatr
+class Wiatr
 {
-public:
+private:
     double predkosc;
     double kierunek;
-
-    Wiatr()
-    {
-
-    }
-
-    void ustawWarunki(double nowaPredkosc, double nowyKierunek)
-    {
-        predkosc = nowaPredkosc;
-        kierunek = nowyKierunek;
-    }
+public:
+    Wiatr(double kierunek, double predkosc);
 };
