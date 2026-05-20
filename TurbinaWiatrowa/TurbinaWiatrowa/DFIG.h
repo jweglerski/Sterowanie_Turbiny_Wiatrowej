@@ -1,16 +1,17 @@
 #pragma once
 #include "Sterownik.h"
-
+#include "UI.h"
 class DFIG:public Sterownik{
+private:    
+    double T;
+    double Kop;
+    double omegar;
+    UI u;
+    double theta;
 public:
-    void obliczKorekte();
-    void obliczTete();
+    DFIG(double omegar, double Kop, UI u);
+    void obliczT();
+    void obliczTheta();
+    StanTurbiny obliczNowyStan() override;
 };
-class U:public DFIG{
-public:
-    void obliczU();
-};
-class I:public DFIG{
-public:
-    void obliczI();
-};
+

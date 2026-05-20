@@ -5,5 +5,5 @@ class Hamowanie:public Sterownik{
 public:
     double pitch;
 private:
-    void ustawPitch();
+    StanTurbiny obliczNowyStan() override;
 };

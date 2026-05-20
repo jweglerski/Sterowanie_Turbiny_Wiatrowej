@@ -3,9 +3,11 @@
 
 class PitchControl:public Sterownik{
 private:
+    double katPitch;
+    double K;
     double katMaksymalny;
     double katMinimalny;
 public:
     PitchControl();
-    void obliczKorekte();
+    StanTurbiny obliczNowyStan() override;
 };

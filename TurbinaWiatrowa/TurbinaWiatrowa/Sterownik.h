@@ -1,23 +1,21 @@
-// Sterownik.h
 #pragma once
-
 #include "Wiatr.h"
 #include "StanTurbiny.h"
-
-
+#include "YawControl.h"
+#include "PitchControl.h"
+#include "DFIG.h"
 class Sterownik
 {
+
 protected:
     Wiatr wiatr;
-    StanTurbiny stan;
+    StanTurbiny turbina;
     double predkoscMinimalna;
+    double predkoscMaksymalna;
     unsigned int tryb;
 public:
     Sterownik();
     void wybierzTryb();
-    StanTurbiny obliczNowyStan();
+    virtual StanTurbiny obliczNowyStan();
     void wykonajPID();
 };
-
-
-

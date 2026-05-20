@@ -1,6 +1,6 @@
 #pragma once
 
-public ref class PID
+class PID
 {
 public:
     double kp;

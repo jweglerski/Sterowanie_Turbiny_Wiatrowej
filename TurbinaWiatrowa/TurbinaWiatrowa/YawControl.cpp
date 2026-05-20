@@ -1,11 +1,16 @@
 #include "YawControl.h"
-
-YawControl::YawControl() : aktualnyKat(0.0), docelowyKat(0.0) {}
-YawControl::~YawControl() {}
-
-void YawControl::obliczKorekce() {}
-bool YawControl::pozycjaOsagnieta() { return false; }
-
-double YawControl::getAktualnyKat() const { return aktualnyKat; }
-double YawControl::getDocelowyKat() const { return docelowyKat; }
-void   YawControl::setDocelowyKat(double kat) { docelowyKat = kat; }
+YawControl::YawControl(){};
+bool YawControl::pozycjaOsiagnieta(){
+    if (turbina.podajYaw()==wiatr.podajKierunek()){
+        return true;
+    }else{
+        return false;
+    }
+}
+StanTurbiny YawControl::obliczNowyStan(){
+    if(YawControl::pozycjaOsiagnieta()){
+        return turbina;
+    }else{
+        return StanTurbiny(turbina.podajPitch(), wiatr.podajKierunek(), turbina.podajObroty());
+    }
+}

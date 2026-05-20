@@ -7,4 +7,6 @@ private:
     double kierunek;
 public:
     Wiatr(double kierunek, double predkosc);
+    double podajPredkosc();
+    double podajKierunek();
 };

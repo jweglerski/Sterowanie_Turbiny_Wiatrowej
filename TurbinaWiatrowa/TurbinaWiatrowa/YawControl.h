@@ -2,6 +2,6 @@
 #include "Sterownik.h"
 class YawControl:public Sterownik{
 public:
-    void obliczKorekte();
-    bool pozycjaOciagnieta();
+    StanTurbiny obliczNowyStan() override;
+    bool pozycjaOsiagnieta();
 };

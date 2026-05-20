@@ -1,10 +1,9 @@
 #include "CzujnikPomiarowy.h"
 
-CzujnikPomiarowy::CzujnikPomiarowy() : odczytKierunku(0.0), odczytPredkosci(0.0) {}
-CzujnikPomiarowy::~CzujnikPomiarowy() {}
-
-void CzujnikPomiarowy::odczytajKierunek() {}
-void CzujnikPomiarowy::odczytajPredkosc() {}
-
-double CzujnikPomiarowy::getOdczytKierunku()  const { return odczytKierunku; }
-double CzujnikPomiarowy::getOdczytPredkosci() const { return odczytPredkosci; }
+CzujnikPomiarowy::CzujnikPomiarowy(double kierunekWiatru, double predkoscWiatru, double katPitch, double katYaw, double predkoscObrotowa):kierunekWiatru(kierunekWiatru), predkoscWiatru(predkoscWiatru), katPitch(katPitch), katYaw(katYaw), predkoscObrotowa(predkoscObrotowa){}
+Wiatr CzujnikPomiarowy::odczytajWiatr(){
+    return Wiatr(kierunekWiatru, predkoscWiatru);
+}
+StanTurbiny CzujnikPomiarowy::odczytajStan(){
+    return StanTurbiny(katPitch, katYaw, predkoscObrotowa);
+}

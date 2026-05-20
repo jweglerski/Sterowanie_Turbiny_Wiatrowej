@@ -8,4 +8,7 @@ private:
     double obroty;
 public:
     StanTurbiny(double pitch, double yaw, double obroty);
+    double podajPitch();
+    double podajYaw();
+    double podajObroty();
 };
