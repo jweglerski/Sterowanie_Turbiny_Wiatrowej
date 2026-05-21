@@ -4,12 +4,14 @@
 #include "YawControl.h"
 #include "PitchControl.h"
 #include "DFIG.h"
+#include "PIDMenager.h"
 class Sterownik
 {
 
 protected:
     Wiatr wiatr;
     StanTurbiny turbina;
+    PIDMenager regulatory;
     double predkoscMinimalna;
     double predkoscMaksymalna;
     unsigned int tryb;

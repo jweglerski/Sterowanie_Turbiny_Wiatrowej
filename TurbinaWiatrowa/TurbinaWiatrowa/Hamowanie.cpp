@@ -1,8 +1,7 @@
 #include "Hamowanie.h"
-Hamowanie::Hamowanie(){}
+Hamowanie::Hamowanie(StanTurbiny turbina, PIDMenager regulatory, Wiatr wiatr, double pitch, double predkoscMaksymalna):ModulSterowania(turbina, regulatory, wiatr), pitch(pitch), predkoscMaksymalna(predkoscMaksymalna){};
 StanTurbiny Hamowanie::obliczNowyStan(){
-    wybierzTryb();
-    if (tryb==2){
-        return StanTurbiny(pitch, turbina.podajYaw(), turbina.podajObroty());
+    if (wiatr.podajPredkosc()>predkoscMaksymalna){
+        return StanTurbiny(pitch, turbina.podajYaw(), turbina.podajObroty(), turbina.podajT(), turbina.podajOmega(), turbina.podajU(), turbina.podajI());
     }
 }

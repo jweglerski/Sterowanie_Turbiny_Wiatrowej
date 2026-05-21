@@ -1,13 +1,14 @@
 #pragma once
-#include "Sterownik.h"
+#include "ModulSterowania.h"
 
-class PitchControl:public Sterownik{
+class PitchControl:public ModulSterowania{
 private:
+    double predkoscMinimalna;
     double katPitch;
     double K;
     double katMaksymalny;
     double katMinimalny;
 public:
-    PitchControl();
+    PitchControl(StanTurbiny turbina, PIDMenager regulatory, Wiatr wiatr, double K, double katMaksymalny, double katMinimalny, double predkoscMinimalna);
     StanTurbiny obliczNowyStan() override;
 };
