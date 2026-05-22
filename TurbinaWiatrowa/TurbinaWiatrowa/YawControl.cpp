@@ -11,6 +11,6 @@ StanTurbiny YawControl::obliczNowyStan(){
     if(YawControl::pozycjaOsiagnieta()){
         return turbina;
     }else{
-        return StanTurbiny(turbina.podajPitch(), wiatr.podajKierunek(), turbina.podajObroty(), turbina.podajT(), turbina.podajOmega(), turbina.podajU(), turbina.podajI());
+        return StanTurbiny(turbina.podajPitch(), wiatr.podajKierunek(), turbina.podajObroty(), turbina.podajT(), turbina.podajU(), turbina.podajI());
     }
 }

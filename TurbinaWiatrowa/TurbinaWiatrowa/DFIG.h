@@ -16,8 +16,7 @@ private:
     void obliczT();
     void obliczTheta();
 public:
-    DFIG(StanTurbiny turbina, PIDMenager regulatory, Wiatr wiatr, double omegar, double Kop, double Tref, UI u, UI i);
-
+    DFIG(StanTurbiny turbina, PIDMenager regulatory, Wiatr wiatr, double Kop);
     StanTurbiny obliczNowyStan() override;
 };
 

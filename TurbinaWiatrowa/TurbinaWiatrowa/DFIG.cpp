@@ -1,7 +1,7 @@
 #include "DFIG.h"
 #include <cmath>
-DFIG::DFIG(StanTurbiny turbina, PIDMenager regulatory, Wiatr wiatr, double omegar, double Kop, double Tref, UI u, UI i)
-    : ModulSterowania(turbina, regulatory, wiatr), omegar(omegar), Kop(Kop), Tref(Tref), u(u), i(i){
+DFIG::DFIG(StanTurbiny turbina, PIDMenager regulatory, Wiatr wiatr, double Kop)
+    : ModulSterowania(turbina, regulatory, wiatr), omegar(turbina.podajObroty()), Kop(Kop), Tref(turbina.podajT()), u(turbina.podajU()), i(turbina.podajI()){
     obliczT();
     obliczTheta();
 }
@@ -16,7 +16,7 @@ StanTurbiny DFIG::obliczNowyStan(){
     obliczT();
     obliczTheta();
     iq=regulatory.updateSpeed(Tref,T);
-    un=new UI(regulatory.updateTorque(i.q(theta), iq), theta, u);
-    in=new UI(iq, theta, i);
-    return StanTurbiny(turbina.podajPitch(), turbina.podajYaw(), turbina.podajObroty(), T, turbina.podajOmega(), un, in);
+    UI un(regulatory.updateTorque(i.q(theta), iq), theta, u);
+    UI in(iq, theta, i);
+    return StanTurbiny(turbina.podajPitch(), turbina.podajYaw(), turbina.podajObroty(), T, un, in);
 }

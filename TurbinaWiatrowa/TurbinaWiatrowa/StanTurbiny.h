@@ -7,16 +7,14 @@ private:
     double pitch;
     double obroty;
     double T;
-    double omega;
-    UI* u;
-    UI* i;
+    UI u;
+    UI i;
 public:
-    StanTurbiny(double pitch, double yaw, double obroty, double T, double omega, UI* u, UI* i);
+    StanTurbiny(double pitch, double yaw, double obroty, double T, UI u, UI i);
     double podajPitch();
     double podajYaw();
     double podajObroty();
     double podajT();
-    double podajOmega();
-    UI* podajU();
-    UI* podajI();
+    UI podajU();
+    UI podajI();
 };

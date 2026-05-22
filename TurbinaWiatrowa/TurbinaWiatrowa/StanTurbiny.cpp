@@ -1,6 +1,6 @@
 #include "StanTurbiny.h"
 
-StanTurbiny::StanTurbiny(double pitch, double yaw, double obroty, double T, double omega, UI* u, UI* i):pitch(pitch),yaw(yaw),obroty(obroty),T(T),omega(omega),u(u),i(i){};
+StanTurbiny::StanTurbiny(double pitch, double yaw, double obroty, double T, UI u, UI i):pitch(pitch),yaw(yaw),obroty(obroty),T(T),u(u),i(i){};
 double StanTurbiny::podajPitch(){
     return pitch;
 }
@@ -13,12 +13,10 @@ double StanTurbiny::podajObroty(){
 double StanTurbiny::podajT(){
     return T;
 }
-double StanTurbiny::podajOmega(){
-    return omega;
-}
-UI* StanTurbiny::podajU(){
+
+UI StanTurbiny::podajU(){
     return u;
 }
-UI* StanTurbiny::podajI(){
+UI StanTurbiny::podajI(){
     return i;
 }

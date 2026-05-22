@@ -2,10 +2,10 @@
 #include "PID.h"
 class PIDMenager{
 private:
-    PID* pitchPID; 
-    PID* yawPID;
-    PID* speedPID;
-    PID* torquePID;
+    PID pitchPID; 
+    PID yawPID;
+    PID speedPID;
+    PID torquePID;
 public:
     PIDMenager(double kpPitch, double kiPitch, double kdPitch,
                 double kpYaw, double kiYaw, double kdYaw,

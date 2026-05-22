@@ -1,12 +1,14 @@
-#include "Form1.h"
+#include "Sterownik.h"
+#include "StanTurbiny.h"
+int main() {
+    for (int i = 0; i < 100; i++) {
+        double predkoscWiatru = 8;
+        double kierunekWiatru = 45;
+        Sterownik sterownik(0.6, 0.4, 0.05, 0.6, 0.4, 0.05, 0.6, 0.4, 0.05, 0.6, 0.4, 0.05, 9.98, 5.0, 9231.6);
+        auto stanTurbiny = sterownik.czytajWartosci();
+        sterownik.obliczNowyStan();
+        sterownik.zmierzWiatr(predkoscWiatru, kierunekWiatru);
+    }
 
-using namespace System;
-using namespace System::Windows::Forms;
-using namespace TurbinaWiatrowa;
-
-[STAThread]
-void main() {
-    Application::EnableVisualStyles();
-    Application::SetCompatibleTextRenderingDefault(false);
-    Application::Run(gcnew Form1());
+    return 0;
 }

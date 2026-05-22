@@ -9,8 +9,8 @@ UI::UI(double q, double theta, UI x){
     odwrotnyClarke();
 }
 void UI::policzAlfaBeta(){
-    alfa=(2/3)*(a-b/2-c/2);
-    beta=(1/sqrt(3))*(b-c);
+    alfa=(2.0/3.0)*(a-b/2.0-c/2.0);
+    beta=(1.0/sqrt(3.0))*(b-c);
 }
 double UI::q(double theta){
     return -alfa*sin(theta)+beta*cos(theta);
@@ -30,6 +30,6 @@ void UI::odwrotnyPark(double q, double theta, UI x){
 }
 void UI::odwrotnyClarke(){
     a=alfa;
-    b=-alfa/2+beta*sqrt(3)/2;
-    c=-alfa/2-beta*sqrt(3)/2;
+    b=-alfa/2.0+beta*sqrt(3.0)/2.0;
+    c=-alfa/2.0-beta*sqrt(3.0)/2.0;
 }
