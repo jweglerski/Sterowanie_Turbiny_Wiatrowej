@@ -8,8 +8,8 @@ Sterownik::Sterownik(double kpPitch, double kiPitch, double kdPitch,double kpYaw
       regulatory(kpPitch, kiPitch, kdPitch, kpYaw, kiYaw, kdYaw, kpSpeed, kiSpeed, kdSpeed, kpTorque, kiTorque, kdTorque),
       czujnik(0,0,0,0,0,0,UI(0,0,0),UI(0,0,0)),
       generator(pozadanyStanTurbiny, regulatory, wiatr, Kop),
-      hamowanie(aktualnyStanTurbiny, regulatory, wiatr, 90, 10),
-      pitchControl(pozadanyStanTurbiny, regulatory, wiatr, K, 90, 0.1, predkoscMinimalna),
+      hamowanie(aktualnyStanTurbiny, regulatory, wiatr, 50, 10),
+      pitchControl(pozadanyStanTurbiny, regulatory, wiatr, K, 50, 0.1, predkoscMinimalna),
       yawControl(aktualnyStanTurbiny, regulatory, wiatr),
       K(K),
       predkoscMinimalna(predkoscMinimalna),
@@ -26,11 +26,11 @@ StanTurbiny Sterownik::czytajWartosci(){
 void Sterownik::obliczNowyStan(){
     generator=DFIG(pozadanyStanTurbiny,regulatory,wiatr,Kop);
     pozadanyStanTurbiny=generator.obliczNowyStan();
-    pitchControl=PitchControl(pozadanyStanTurbiny,regulatory,wiatr, K, 90, 0.1, predkoscMinimalna);
+    pitchControl=PitchControl(pozadanyStanTurbiny,regulatory,wiatr, K, 50, 0.1, predkoscMinimalna);
     pozadanyStanTurbiny=pitchControl.obliczNowyStan();
-    yawControl=YawControl(aktualnyStanTurbiny,regulatory,wiatr);
+    yawControl=YawControl(pozadanyStanTurbiny,regulatory,wiatr);
     pozadanyStanTurbiny=yawControl.obliczNowyStan();
-    hamowanie=Hamowanie(aktualnyStanTurbiny, regulatory, wiatr, 90, 10); 
+    hamowanie=Hamowanie(pozadanyStanTurbiny, regulatory, wiatr, 50, 10); 
     pozadanyStanTurbiny=hamowanie.obliczNowyStan();
     czujnik.zmierzStanTurbiny(regulatory, pozadanyStanTurbiny, aktualnyStanTurbiny);
 }

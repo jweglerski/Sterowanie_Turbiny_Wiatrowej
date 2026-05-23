@@ -118,19 +118,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CzujnikPomiarowy.cpp" />
+    <ClCompile Include="DFIG.cpp" />
     <ClCompile Include="Form1.cpp" />
+    <ClCompile Include="Hamowanie.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ModulSterowania.cpp" />
+    <ClCompile Include="PID.cpp" />
+    <ClCompile Include="PIDMenager.cpp" />
+    <ClCompile Include="PitchControl.cpp" />
+    <ClCompile Include="StanTurbiny.cpp" />
+    <ClCompile Include="Sterownik.cpp" />
+    <ClCompile Include="UI.cpp" />
+    <ClCompile Include="Wiatr.cpp" />
+    <ClCompile Include="YawControl.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CzujnikPomiarowy.h" />
+    <ClInclude Include="DFIG.h" />
     <ClInclude Include="Form1.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Hamowanie.h" />
+    <ClInclude Include="ModulSterowania.h" />
     <ClInclude Include="PID.h" />
+    <ClInclude Include="PIDMenager.h" />
     <ClInclude Include="PitchControl.h" />
     <ClInclude Include="StanTurbiny.h" />
     <ClInclude Include="Sterownik.h" />
+    <ClInclude Include="UI.h" />
     <ClInclude Include="Wiatr.h" />
     <ClInclude Include="YawControl.h" />
   </ItemGroup>
@@ -138,6 +154,13 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.h</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="obrazki\igla_wiatr.png" />
+    <Image Include="obrazki\igla_wieza.png" />
+    <Image Include="obrazki\kompas.png" />
+    <Image Include="obrazki\lopata.png" />
+    <Image Include="obrazki\wirnik.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

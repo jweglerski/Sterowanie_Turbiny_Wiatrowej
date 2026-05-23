@@ -27,8 +27,13 @@ void PID::integer(){
 }
 double PID::update(double target, double pomiar){
     error(target, pomiar);
-    integer();
-    return kp*e+ki*i+kd*(e-lastE)/dt();
+    double czas = dt();
+    i += e * czas;
+    double rozniczka = 0;
+    if (czas > 0){
+        rozniczka = (e - lastE) / czas;
+    }
+    return kp * e + ki * i + kd * rozniczka;
 }
 void PID::reset(){
     e=0;

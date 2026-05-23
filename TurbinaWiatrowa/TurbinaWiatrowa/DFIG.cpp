@@ -15,6 +15,12 @@ void DFIG::obliczTheta(){
 StanTurbiny DFIG::obliczNowyStan(){
     obliczT();
     obliczTheta();
+    double predkoscWiatru = wiatr.podajPredkosc();
+    double obrotyZadane = 0;
+    if (predkoscWiatru >= 3 && predkoscWiatru <= 10){
+        obrotyZadane = (predkoscWiatru - 3.0) * 8.0;
+    }
+    Tref = Kop * obrotyZadane * obrotyZadane;
     iq=regulatory.updateSpeed(Tref,T);
     UI un(regulatory.updateTorque(i.q(theta), iq), theta, u);
     UI in(iq, theta, i);
