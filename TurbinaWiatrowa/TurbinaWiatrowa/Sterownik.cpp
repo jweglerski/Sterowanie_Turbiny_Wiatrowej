@@ -30,7 +30,7 @@ void Sterownik::obliczNowyStan(){
     pozadanyStanTurbiny=pitchControl.obliczNowyStan();
     yawControl=YawControl(pozadanyStanTurbiny,regulatory,wiatr);
     pozadanyStanTurbiny=yawControl.obliczNowyStan();
-    hamowanie=Hamowanie(pozadanyStanTurbiny, regulatory, wiatr, 0.1, 10); 
+    hamowanie=Hamowanie(pozadanyStanTurbiny, regulatory, wiatr, 90, 10); 
     pozadanyStanTurbiny=hamowanie.obliczNowyStan();
     czujnik.zmierzStanTurbiny(regulatory, pozadanyStanTurbiny, aktualnyStanTurbiny);
 }

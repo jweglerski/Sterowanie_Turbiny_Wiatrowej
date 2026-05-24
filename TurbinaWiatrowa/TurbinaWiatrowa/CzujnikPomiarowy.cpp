@@ -44,30 +44,23 @@ void CzujnikPomiarowy::zmierzStanTurbiny(PIDMenager regulatory, StanTurbiny poza
     if (katPitch < 0.1){
         katPitch = 0.1;
     }
-    if (katPitch > 50){
-        katPitch = 50;
+    if (katPitch > 90){
+        katPitch = 90;
     }
 
-    if (predkoscWiatru < 3.0){
-        predkoscObrotowa = 0;
-    }else if (predkoscWiatru > 10.0){
-        predkoscObrotowa = aktualnyStanTurbiny.podajObroty() * 0.95;
-    }else{
-        // Prosta charakterystyka pracy wirnika:
-        // turbina rusza od ok. 3 m/s, do 10 m/s przyspiesza,
-        // a powyzej tego zakresu wlacza sie hamowanie.
-        double obrotyZadane;
-        obrotyZadane = (predkoscWiatru - 3.0) * 8.0;
-        if (obrotyZadane < 0){
-            obrotyZadane = 0;
-        }
 
-        double wspolczynnikPitch = cos(katPitch * 3.14159265358979323846 / 180.0);
-        if (wspolczynnikPitch < 0){
-            wspolczynnikPitch = 0;
-        }
-        predkoscObrotowa = obrotyZadane * wspolczynnikPitch;
+    double obrotyZadane;
+    obrotyZadane = (predkoscWiatru - 3.0) * 8.0;
+    if (obrotyZadane < 0){
+        obrotyZadane = 0;
     }
+
+    double wspolczynnikPitch = cos(katPitch * 3.14159265358979323846 / 180.0);
+    if (wspolczynnikPitch < 0){
+        wspolczynnikPitch = 0;
+    }
+    predkoscObrotowa = obrotyZadane * wspolczynnikPitch;
+
     if (predkoscObrotowa < 0){
         predkoscObrotowa = 0;
     }

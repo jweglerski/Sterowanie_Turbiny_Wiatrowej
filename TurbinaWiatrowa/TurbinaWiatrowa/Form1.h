@@ -408,11 +408,11 @@ namespace TurbinaWiatrowa {
 		{
 			pitch = 0;
 		}
-		if (pitch > 50)
+		if (pitch > 90)
 		{
-			pitch = 50;
+			pitch = 90;
 		}
-		// Pitch rosnie od 0.1 do 50 stopni, potem wlacza sie hamowanie.
+		// Pitch rosnie od 0.1 do 90 stopni, potem wlacza sie hamowanie.
 		double katRysunku = -pitch;
 		podpis(g, "Przekrój łopaty i kąt pitch", 10, 10);
 
