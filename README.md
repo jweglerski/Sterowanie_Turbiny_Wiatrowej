@@ -18,4 +18,4 @@ Celem projektu jest przedstawienie podstaw działania automatycznego systemu ste
 - kontrola bezpieczeństwa,
 - automatyczne ustawianie gondoli,
 - regulacja pracy turbiny,
-- zapis danych symulacji.
+
