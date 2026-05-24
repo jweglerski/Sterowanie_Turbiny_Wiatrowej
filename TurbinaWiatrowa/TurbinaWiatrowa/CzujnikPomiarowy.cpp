@@ -48,8 +48,10 @@ void CzujnikPomiarowy::zmierzStanTurbiny(PIDMenager regulatory, StanTurbiny poza
         katPitch = 50;
     }
 
-    if (predkoscWiatru < 3.0 || predkoscWiatru > 10.0){
+    if (predkoscWiatru < 3.0){
         predkoscObrotowa = 0;
+    }else if (predkoscWiatru > 10.0){
+        predkoscObrotowa = aktualnyStanTurbiny.podajObroty() * 0.95;
     }else{
         // Prosta charakterystyka pracy wirnika:
         // turbina rusza od ok. 3 m/s, do 10 m/s przyspiesza,

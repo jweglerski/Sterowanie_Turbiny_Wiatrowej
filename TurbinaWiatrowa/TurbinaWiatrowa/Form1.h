@@ -72,6 +72,7 @@ namespace TurbinaWiatrowa {
 		Label^ lblPitch;
 		Label^ lblYaw;
 		Label^ lblHamowanie;
+		Label^ lblCzas;
 		Label^ lblGenerator;
 		Label^ lblMoment;
 		ProgressBar^ pasekMocy;
@@ -89,6 +90,7 @@ namespace TurbinaWiatrowa {
 		double aktualnaPredkosc;
 		double aktualnyKierunek;
 		double predkoscWirnikaDoAnimacji;
+		double czasSymulacji;
 		int licznikTimera;
 		bool hamowanieAktywne;
 
@@ -110,6 +112,7 @@ namespace TurbinaWiatrowa {
 			this->lblPitch = (gcnew System::Windows::Forms::Label());
 			this->lblYaw = (gcnew System::Windows::Forms::Label());
 			this->lblHamowanie = (gcnew System::Windows::Forms::Label());
+			this->lblCzas = (gcnew System::Windows::Forms::Label());
 			this->lblGenerator = (gcnew System::Windows::Forms::Label());
 			this->lblMoment = (gcnew System::Windows::Forms::Label());
 			this->pasekMocy = (gcnew System::Windows::Forms::ProgressBar());
@@ -189,12 +192,13 @@ namespace TurbinaWiatrowa {
 			this->grupaParametrow->Controls->Add(this->lblPitch);
 			this->grupaParametrow->Controls->Add(this->lblYaw);
 			this->grupaParametrow->Controls->Add(this->lblHamowanie);
+			this->grupaParametrow->Controls->Add(this->lblCzas);
 			this->grupaParametrow->Controls->Add(this->lblMoment);
 			this->grupaParametrow->Controls->Add(this->lblGenerator);
 			this->grupaParametrow->Controls->Add(this->pasekMocy);
 			this->grupaParametrow->Location = System::Drawing::Point(742, 250);
 			this->grupaParametrow->Name = L"grupaParametrow";
-			this->grupaParametrow->Size = System::Drawing::Size(250, 305);
+			this->grupaParametrow->Size = System::Drawing::Size(250, 335);
 			this->grupaParametrow->TabStop = false;
 			this->grupaParametrow->Text = L"Parametry pracy turbiny";
 			ustawLabel(this->lblPredkosc, 28);
@@ -205,9 +209,10 @@ namespace TurbinaWiatrowa {
 			ustawLabel(this->lblYaw, 168);
 			ustawLabel(this->lblHamowanie, 196);
 			ustawLabel(this->lblMoment, 224);
-			this->lblGenerator->Location = System::Drawing::Point(15, 252);
+			ustawLabel(this->lblCzas, 252);
+			this->lblGenerator->Location = System::Drawing::Point(15, 280);
 			this->lblGenerator->Size = System::Drawing::Size(220, 35);
-			this->pasekMocy->Location = System::Drawing::Point(18, 292);
+			this->pasekMocy->Location = System::Drawing::Point(18, 320);
 			this->pasekMocy->Maximum = 100;
 			this->pasekMocy->Size = System::Drawing::Size(210, 10);
 			// 
@@ -221,7 +226,7 @@ namespace TurbinaWiatrowa {
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::FromArgb(242, 245, 247);
-			this->ClientSize = System::Drawing::Size(1018, 580);
+			this->ClientSize = System::Drawing::Size(1018, 610);
 			this->Controls->Add(this->grupaParametrow);
 			this->Controls->Add(this->grupaSterowania);
 			this->Controls->Add(this->panelKompas);
@@ -259,6 +264,7 @@ namespace TurbinaWiatrowa {
 			aktualnaPredkosc = suwakPredkosc->Value / 5.0;
 			aktualnyKierunek = suwakKierunek->Value;
 			predkoscWirnikaDoAnimacji = 0;
+			czasSymulacji = 0;
 			licznikTimera = 0;
 			hamowanieAktywne = false;
 
@@ -269,7 +275,7 @@ namespace TurbinaWiatrowa {
 			obrazIglyWiatru = Image::FromFile(Path::Combine(folder, "igla_wiatr.png"));
 			obrazIglyWiezy = Image::FromFile(Path::Combine(folder, "igla_wieza.png"));
 
-			aktualizujSymulacje();
+			aktualizujSymulacje(false);
 			timerAnimacji->Start();
 		}
 
@@ -280,8 +286,13 @@ namespace TurbinaWiatrowa {
 			return Path::Combine(folderZrodlowy, "obrazki");
 		}
 
-		void aktualizujSymulacje()
+		void aktualizujSymulacje(bool liczCzas)
 		{
+			if (liczCzas)
+			{
+				czasSymulacji += 0.15;
+			}
+
 			aktualnaPredkosc = suwakPredkosc->Value / 5.0;
 			aktualnyKierunek = suwakKierunek->Value;
 
@@ -295,10 +306,6 @@ namespace TurbinaWiatrowa {
 			if (obroty < 0 || Double::IsNaN(obroty) || Double::IsInfinity(obroty))
 			{
 				obroty = 0;
-			}
-			if (hamowanieAktywne)
-			{
-				obroty *= 0.25;
 			}
 			predkoscWirnikaDoAnimacji = obroty;
 
@@ -325,6 +332,7 @@ namespace TurbinaWiatrowa {
 			lblYaw->Text = String::Format("Ustawienie wieży: {0:F1} stopni", ostatniStan->podajYaw());
 			lblHamowanie->Text = hamowanieAktywne ? "Hamowanie: załączone (>10 m/s)" : "Hamowanie: wyłączone";
 			lblMoment->Text = String::Format("Moment/nastawa T: {0:F2}", moment);
+			lblCzas->Text = String::Format("Czas symulacji: {0:F2} s", czasSymulacji);
 			lblGenerator->Text = String::Format("Prądnica U alfa/beta: {0:F2} / {1:F2}",
 				ostatniStan->podajU().Alfa(), ostatniStan->podajU().Beta());
 
@@ -357,7 +365,7 @@ namespace TurbinaWiatrowa {
 
 	private: System::Void suwaki_Scroll(System::Object^ sender, System::EventArgs^ e)
 	{
-		aktualizujSymulacje();
+		aktualizujSymulacje(false);
 	}
 
 	private: System::Void timerAnimacji_Tick(System::Object^ sender, System::EventArgs^ e)
@@ -373,7 +381,7 @@ namespace TurbinaWiatrowa {
 		if (licznikTimera >= 5)
 		{
 			licznikTimera = 0;
-			aktualizujSymulacje();
+			aktualizujSymulacje(true);
 		}
 	}
 
@@ -447,8 +455,8 @@ namespace TurbinaWiatrowa {
 		Graphics^ g = e->Graphics;
 		g->SmoothingMode = SmoothingMode::AntiAlias;
 		g->DrawImage(obrazKompasu, Rectangle(15, 15, 300, 300));
-		rysujObrazObrocony(g, obrazIglyWiatru, Rectangle(115, 45, 100, 240), aktualnyKierunek);
-		rysujObrazObrocony(g, obrazIglyWiezy, Rectangle(125, 60, 80, 210), ostatniStan->podajYaw());
+		rysujObrazObrocony(g, obrazIglyWiatru, Rectangle(15, 15, 300, 300), aktualnyKierunek);
+		rysujObrazObrocony(g, obrazIglyWiezy, Rectangle(15, 15, 300, 300), ostatniStan->podajYaw());
 		podpis(g, "niebieska: wiatr", 15, 304);
 		podpis(g, "czerwona: wieża", 178, 304);
 	}

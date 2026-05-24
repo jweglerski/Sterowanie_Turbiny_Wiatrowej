@@ -8,7 +8,7 @@ Sterownik::Sterownik(double kpPitch, double kiPitch, double kdPitch,double kpYaw
       regulatory(kpPitch, kiPitch, kdPitch, kpYaw, kiYaw, kdYaw, kpSpeed, kiSpeed, kdSpeed, kpTorque, kiTorque, kdTorque),
       czujnik(0,0,0,0,0,0,UI(0,0,0),UI(0,0,0)),
       generator(pozadanyStanTurbiny, regulatory, wiatr, Kop),
-      hamowanie(aktualnyStanTurbiny, regulatory, wiatr, 50, 10),
+      hamowanie(aktualnyStanTurbiny, regulatory, wiatr, 0.1, 10),
       pitchControl(pozadanyStanTurbiny, regulatory, wiatr, K, 50, 0.1, predkoscMinimalna),
       yawControl(aktualnyStanTurbiny, regulatory, wiatr),
       K(K),
@@ -30,7 +30,7 @@ void Sterownik::obliczNowyStan(){
     pozadanyStanTurbiny=pitchControl.obliczNowyStan();
     yawControl=YawControl(pozadanyStanTurbiny,regulatory,wiatr);
     pozadanyStanTurbiny=yawControl.obliczNowyStan();
-    hamowanie=Hamowanie(pozadanyStanTurbiny, regulatory, wiatr, 50, 10); 
+    hamowanie=Hamowanie(pozadanyStanTurbiny, regulatory, wiatr, 0.1, 10); 
     pozadanyStanTurbiny=hamowanie.obliczNowyStan();
     czujnik.zmierzStanTurbiny(regulatory, pozadanyStanTurbiny, aktualnyStanTurbiny);
 }
